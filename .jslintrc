@@ -1,0 +1,15 @@
+{
+  "vars"    : true,
+  "browser" : true,
+  "devel"   : true,
+  "es5"     : true,
+  "strict_mode":true,
+  "indent" : 4,
+  "predef" : [
+    "require",
+    "define",
+    "FileReader",
+    "module",
+    "__dirname"
+  ]
+}
