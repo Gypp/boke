@@ -87,18 +87,18 @@ body > div {
     color: #d50000;
 }
 
-#menu .navIcon{
+#menu .navigation-icon{
     height: 100%;
     width: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#menu .navIcon > i{
+#menu .navigation-icon > i{
     font-size: 32px;
 }
 
-#menu .navTitle {
+#menu .navigation-title {
     padding-left: 16px;
     font-size: 20px;
 }
@@ -236,14 +236,14 @@ body > div {
     object-fit: contain;
 }
 
-.sliderButton {
+.slider-button {
     width: 10%;
     min-width: 150px;
     display: flex;
     justify-content: center;
 }
 
-.sliderButton:hover {
+.slider-button:hover {
     background: rgba(20,20,20,0.8);
     cursor: pointer;
 }
@@ -257,18 +257,18 @@ body > div {
     overflow-y: auto;
 }
 
-.albumList .album {
+.album-list .album {
     flex: 1;
     display:     flex;
     min-width: 350px;
     min-height: 250px;
     padding: 10px;
 }
-.albumList .album > div:hover {
+.album-list .album > div:hover {
     cursor: pointer;
 }
 
-.albumList .album > div {
+.album-list .album > div {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -278,25 +278,25 @@ body > div {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.albumList .album  .background {
+.album-list .album  .background {
     flex:1;
     width: 100%;
     background-size: cover;
     background-position: center;
 }
 
-.albumList .album  .label {
+.album-list .album  .label {
       font-size:24px;
       color:white;
       padding: 6px 0px;
       text-align: center;
 }
 
-.albumList .album  .label > div {
+.album-list .album  .label > div {
     margin-left: 10px;
 }
 
-.albumList .label-bar {
+.album-list .label-bar {
     background: rgba(0,0,0,0.5);
     flex-direction: row;
     display: flex;
@@ -305,7 +305,7 @@ body > div {
     width: 100%;
 }
 
-.albumList{
+.album-list{
     flex:1;
     display:flex;
     flex-direction:column;
@@ -324,20 +324,20 @@ body > div {
     flex-direction: column;
 }
 
-.aboutMe{
+.about-me{
   display:flex;
   justify-content:center;
   overflow-y: auto;
 }
 
-.aboutMe > div{
+.about-me > div{
   margin: auto;
   width: 80%;
   max-width:1080px;
   padding: 25px 0px;
 }
 
-.aboutMe > div > div{
+.about-me > div > div{
     width: 100%;
     background: #FFF none repeat scroll 0% 0%;
     padding: 25px 0px;
@@ -345,19 +345,19 @@ body > div {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.aboutMe > div > div > *{
+.about-me > div > div > *{
     padding: 0px 12px;
 }
 
-.sliderButton{
+.slider-button{
   position: absolute;  height: 100%;display:flex; align-items:center;
 }
 
-.sliderButtonRight{
+.slider-button-right{
   right:0;
 }
 
-.sliderButtonLeft{
+.slider-button-left{
   left:0;
 }
 .administrate{
@@ -416,13 +416,13 @@ body > div {
     padding:25px 75px;
     overflow-y: auto;
 }
-.adminAbout{
+.admin-about{
     position: relative;
     display: flex;
     flex: 1;
     overflow-y: hidden;
 }
-.adminAbout > div > textarea {
+.admin-about > div > textarea {
     display: flex;
     flex: 1;
     margin: 16px;
@@ -431,7 +431,7 @@ body > div {
     resize: none;
     padding: 4px;
 }
-.adminAbout > div{
+.admin-about > div{
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -443,25 +443,25 @@ body > div {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     overflow: hidden;
 }
-.adminAbout > div > * {
+.admin-about > div > * {
     padding: 16px;
 }
 
-.adminAbout > div > h2 {
+.admin-about > div > h2 {
     background: rgb(18, 145, 239) none repeat scroll 0% 0%;
     color: white;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
 }
-.adminAbout > textarea{
+.admin-about > textarea{
     margin: 16px;
     width: 100%;
 }
 
-.adminElements {
+.admin-elements {
     height: 100%;
 }
 
-.adminElements > div {
+.admin-elements > div {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -474,30 +474,30 @@ body > div {
     flex: 1;
 }
 
-.events .adminElements > div {
+.events .admin-elements > div {
     flex-direction: column;
     align-items: center;
 }
 
-.events .adminElements .card {
+.events .admin-elements .card {
     height: auto;
     max-width: 750px;
 }
 
-.events .adminElements .card > div{
+.events .admin-elements .card > div{
     align-items: center;
 }
 
 
-.events .adminElements .card .label{
+.events .admin-elements .card .label{
     font-size: 22px;
     margin: 8px 0;
 }
-.events .adminElements .card .menu > div{
+.events .admin-elements .card .menu > div{
     justify-content: flex-end;
 }
 
-.events .adminElements .card .label-bar{
+.events .admin-elements .card .label-bar{
     position: inherit;
 }
 
@@ -505,7 +505,7 @@ body > div {
     margin: 16px;
 }
 
-.adminAbout >.addElement{
+.admin-about >.add-element{
     position: absolute;
     background: rgb(1, 117, 230) none repeat scroll 0% 0%;
     width: 50px;
@@ -517,7 +517,7 @@ body > div {
     margin-bottom: 25px;
     margin-right: 25px;
 }
-.addElement{
+.add-element{
     width: 50px;
     height: 50px;
     background: rgb(1, 117, 230) none repeat scroll 0% 0%;
@@ -531,11 +531,11 @@ body > div {
     justify-content: center;
     align-items: center;
 }
-.addElement i {
+.add-element i {
     font-size:24px;
     color: white;
 }
-.addElement:hover {
+.add-element:hover {
     cursor: pointer;
 }
 
@@ -724,6 +724,6 @@ mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimim
     cursor: pointer;
 }
 
-.events .adminElements > div{
+.events .admin-elements > div{
     flex-wrap: nowrap;
 }

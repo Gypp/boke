@@ -65,7 +65,7 @@ define(["mithril", "services/model", "components/ui/picture/index", "application
             return m("div", {class: "slider"}, [
                 m("div", {
                     style:  ctrl.getPreviousPic() ? "" : "display:none;",
-                    class: "sliderButton sliderButtonLeft",
+                    class: "slider-button slider-button-left",
                     onclick: function () {
                         ctrl.changeToPicture(ctrl.getPreviousPic());
                     }
@@ -74,7 +74,7 @@ define(["mithril", "services/model", "components/ui/picture/index", "application
                 ]),
                 m("div", {
                     style: ctrl.getNextPic() ? "" : "display:none;",
-                    class: "sliderButton sliderButtonRight",
+                    class: "slider-button slider-button-right",
                     onclick: function () {
                         ctrl.changeToPicture(ctrl.getNextPic());
                     }

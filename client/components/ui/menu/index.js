@@ -17,7 +17,7 @@ define(["mithril", "components/ui/material-icons/index", "utils"], function (m, 
             };
         },
         view: function (ctrl) {
-            return m("div", {class: "azerty", onclick: function () {ctrl.state.showMenu(!ctrl.state.showMenu()); }}, [
+            return m("div", {onclick: function () {ctrl.state.showMenu(!ctrl.state.showMenu()); }}, [
                 m.component(MaterialIcons, {code: "more_vert"}),
                 ctrl.state.showMenu() ? m("div", {class: "menu-list", config: function (elem, isInit) {
                     if (!isInit) {

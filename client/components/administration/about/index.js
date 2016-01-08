@@ -13,7 +13,7 @@ define(["mithril", "components/ui/markdown/index", "services/model", "components
             };
         },
         view: function (ctrl) {
-            return m("div", {class: "adminAbout"}, [
+            return m("div", {class: "admin-about"}, [
                 m("div", [
                     m("h2", "Zone d'édition MarkDown"),
                     m("textarea", {oninput: m.withAttr("value", ctrl.markdown), "value" : ctrl.markdown()})
@@ -22,7 +22,7 @@ define(["mithril", "components/ui/markdown/index", "services/model", "components
                     m("h2", "Prévisualisation"),
                     m.component(MarkDown, {content: ctrl.markdown})
                 ]),
-                m("div", {class: "addElement", onclick: function () {
+                m("div", {class: "add-element", onclick: function () {
                     model.addBiography({content: ctrl.markdown()});
                 }}, [
                     m.component(MaterialIcons, {code: "save"})

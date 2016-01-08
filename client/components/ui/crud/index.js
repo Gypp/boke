@@ -44,10 +44,10 @@ define(["mithril", "components/ui/material-icons/index", "components/ui/card/ind
         },
         view: function (ctrl) {
             return m("div", {class: "content", style: ctrl.state.showAdd() ? "overflow-y:hidden" : ""}, [
-                (!ctrl.appState.navigation.visible() && !(ctrl.state.showAdd() || ctrl.state.showUpdate())) ? m("div", {class: "addElement", onclick: ctrl.toggleShowAdd}, [
+                (!ctrl.appState.navigation.visible() && !(ctrl.state.showAdd() || ctrl.state.showUpdate())) ? m("div", {class: "add-element", onclick: ctrl.toggleShowAdd}, [
                     m.component(MaterialIcons, {code: "add"})
                 ]) : "",
-                m("div", {class: "adminElements"}, [
+                m("div", {class: "admin-elements"}, [
                     m("div", [
                         ctrl.elements().map(function (element) {
                             return m.component(Card, {

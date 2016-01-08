@@ -27,7 +27,7 @@ define(["mithril", "services/model", "components/ui/album/index"], function (m, 
             };
         },
         view: function (ctrl) {
-            return m("div", {class: "albumList"}, [
+            return m("div", {class: "album-list"}, [
                 m("div", {class: "albums"}, [
                     ctrl.albums().filter(ctrl.visible).map(function (album) {
                         return m.component(Album, {

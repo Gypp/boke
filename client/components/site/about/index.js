@@ -10,7 +10,7 @@ define(["mithril", "services/model"], function (m, model) {
             };
         },
         view: function (ctrl) {
-            return m("div", {class: "aboutMe", style: ""}, [
+            return m("div", {class: "about-me", style: ""}, [
                 m("div", [
                     m("div", {style: ""}, [
                         m.trust(ctrl.content().html)
