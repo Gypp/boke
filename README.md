@@ -13,6 +13,7 @@ This readme contain all the infos you need to run the project and contact the pe
 
 ### How do I get set up? ###
 You must have a mongodb running
+
 	git clone https://github.com/bokephoto/boke.git
 	cd boke
 	npm install
