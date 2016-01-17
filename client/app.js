@@ -10,8 +10,8 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
     "components/site/about/index", "components/site/slider/index", "components/ui/header/index", "application-state/index",
     "components/ui/filter/index", "components/administration/login/index", "components/administration/about/index",
     "components/administration/albums/index", "components/administration/events/index", "components/administration/pictures/index",
-    "components/ui/navigation/index", "components/site/events/index"],
-    function (m, Albums, Pictures, Home, Aboutme, Slider, Header, appState, Filter, Login, AdminAbout, AdminAlbums, AdminEvents, AdminPictures, Navigation, Events) {
+    "components/ui/navigation/index", "components/site/events/index", "services/model"],
+    function (m, Albums, Pictures, Home, Aboutme, Slider, Header, appState, Filter, Login, AdminAbout, AdminAlbums, AdminEvents, AdminPictures, Navigation, Events, model) {
         'use strict';
         m.route.mode = "hash";
 
@@ -23,6 +23,10 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
             ])
         });
 
+        var administrationMenu = [
+            {label: "Déconnexion", onClick: function(){model.removeToken(); m.route("/home");}}
+        ];
+
         m.route(document.body, "/", {
             "/": Home,
             "/login": Login,
@@ -31,7 +35,7 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
                     appState.header.title("About");
                     appState.navigation.visible(false);
                     appState.navigation.disabled(false);
-                    return {title: appState.header.title};
+                    return {title: appState.header.title, menu: m.prop(administrationMenu)};
                 },
                 view: function (ctrl) {
                     return m("div", {class: "wrapper"}, [
@@ -46,7 +50,7 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
                     appState.header.title("Albums");
                     appState.navigation.visible(false);
                     appState.navigation.disabled(false);
-                    return {title: appState.header.title};
+                    return {title: appState.header.title, menu: m.prop(administrationMenu)};
                 },
                 view: function (ctrl) {
                     return m("div", {class: "wrapper"}, [
@@ -62,7 +66,7 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
                     appState.header.back("/administrate/albums");
                     appState.navigation.visible(false);
                     appState.navigation.disabled(false);
-                    return {title: appState.header.title, back: appState.header.back};
+                    return {title: appState.header.title, back: appState.header.back, menu: m.prop(administrationMenu)};
                 },
                 view: function (ctrl) {
                     return m("div", {class: "wrapper"}, [
@@ -77,7 +81,7 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
                     appState.header.title("Events");
                     appState.navigation.visible(false);
                     appState.navigation.disabled(false);
-                    return {title: appState.header.title};
+                    return {title: appState.header.title, menu: m.prop(administrationMenu)};
                 },
                 view: function (ctrl) {
                     return m("div", {class: "wrapper"}, [

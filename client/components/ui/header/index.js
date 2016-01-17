@@ -1,4 +1,4 @@
-define(["mithril", "components/ui/filter/index", "application-state/index", "components/ui/material-icons/index"], function (m, Filter, appState, MaterialIcon) {
+define(["mithril", "components/ui/filter/index", "application-state/index", "components/ui/material-icons/index", "components/ui/menu/index"], function (m, Filter, appState, MaterialIcon, Menu) {
     'use strict';
 
     function createStateVM() {
@@ -13,6 +13,7 @@ define(["mithril", "components/ui/filter/index", "application-state/index", "com
         controller: function (options) {
             var title       = options.title  || m.prop();
             var back        = options.back   || m.prop();
+            var menu        = options.menu   || m.prop([]);
             var filter      = options.filter;
             var stateVM     = createStateVM();
 
@@ -31,7 +32,8 @@ define(["mithril", "components/ui/filter/index", "application-state/index", "com
                 filter: filter,
                 toggleFilter: toggleFilter,
                 toggleNavigation: toggleNavigation,
-                stateVM: stateVM
+                stateVM: stateVM,
+                menu: menu
             };
         },
         view: function (ctrl) {
@@ -44,14 +46,15 @@ define(["mithril", "components/ui/filter/index", "application-state/index", "com
                     !appState.navigation.disabled() ? m.component(MaterialIcon, {key: new Date().getTime(), code: appState.navigation.visible() ? "keyboard_arrow_up" : "keyboard_arrow_down"}) : '',
                     m("div", {class: "title", style: ctrl.title() === "undefined" ? "visibility:hidden;" : "position:relative;"}, ctrl.title())
                 ]),
-                m("div", {style: "height:100%;display: flex;align-items: center;justify-content: flex-end;"}, [
+                m("div", {style: "height:100%;display:flex;align-items:center;justify-content:flex-end;"}, [
                     ctrl.stateVM.filter() && ctrl.filter ? m("i", {
                         class: "material-icons",
                         style: "color: black;z-index: 1;line-height:100%;margin-right:15px;",
                         onclick: ctrl.toggleFilter
                     }, "close") : '',
-                    ctrl.stateVM.filter() && ctrl.filter ? Filter.view(ctrl.filter) :  ctrl.filter ? m("i", {class: "material-icons", style: "margin-right:15px;", onclick: ctrl.toggleFilter}, "search") : ''
-                ])
+                    ctrl.stateVM.filter() && ctrl.filter ? Filter.view(ctrl.filter) :  ctrl.filter ? m("i", {class: "material-icons", style: "margin-right:15px;", onclick: ctrl.toggleFilter}, "search") : '',
+                    ctrl.menu().length > 0 ? m("div", {class: "user-menu"}, m.component(Menu, {items: ctrl.menu})) : ""
+                ]),
             ]);
         }
     };

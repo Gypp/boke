@@ -5,7 +5,7 @@ define(["mithril", "components/ui/material-icons/index", "utils", "application-s
     var Navigation = {
         controller: function (options) {
             var toggle = function () {
-                appState.navigation(!appState.navigation());
+                appState.navigation.visible(!appState.navigation.visible());
             };
 
             return {

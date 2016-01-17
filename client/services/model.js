@@ -40,26 +40,29 @@ define(["mithril"], function (m) {
             Buffer.getRessource(url, callback);
         },
         addAlbum: function (data, callback) {
+            var token = this.getToken();
             m.request({
                 method: "POST",
                 url: "albums",
-                data: {"name": data.name, "token": sessionStorage.getItem('token')}
+                data: {"name": data.name, "token": token}
             }).then(callback);
             Buffer.clear();
         },
         removeAlbum: function (album, callback) {
+            var token = this.getToken();
             m.request({
                 method: "DELETE",
                 url: album.url + "/" + album._id,
-                data: {"token": sessionStorage.getItem('token')}
+                data: {"token": token}
             }).then(callback);
             Buffer.clear();
         },
         updateAlbum: function (data, album, callback) {
+            var token = this.getToken();
             m.request({
                 method: "PUT",
                 url: album.url + "/" + album._id,
-                data: {"token": sessionStorage.getItem('token'), name: data.name}
+                data: {"token": token, name: data.name}
             }).then(callback);
             Buffer.clear();
         },
@@ -68,26 +71,29 @@ define(["mithril"], function (m) {
             Buffer.getRessource(url, callback);
         },
         addPicture: function (data, albumId, callback) {
+            var token = this.getToken();
             m.request({
                 method: "POST",
                 url: "albums/" + albumId + "/pictures",
-                data: {"name": data.name, "base64": data.base64, "extension": data.extension, "token": sessionStorage.getItem('token')}
+                data: {"name": data.name, "base64": data.base64, "extension": data.extension, "token": token}
             }).then(callback);
             Buffer.clear();
         },
         removePicture: function (picture, callback) {
+            var token = this.getToken();
             m.request({
                 method: "DELETE",
                 url: picture.url + "/" + picture._id,
-                data: {"token": sessionStorage.getItem('token')}
+                data: {"token": token}
             }).then(callback);
             Buffer.clear();
         },
         updatePicture: function (data, picture, callback) {
+            var token = this.getToken();
             m.request({
                 method: "PUT",
                 url: picture.url + "/" + picture._id,
-                data: {"token": sessionStorage.getItem('token'), name: data.name}
+                data: {"token": token, name: data.name}
             }).then(callback);
             Buffer.clear();
         },
@@ -96,10 +102,11 @@ define(["mithril"], function (m) {
             Buffer.getRessource(url, callback);
         },
         addCover: function (data, albumId, callback) {
+            var token = this.getToken();
             m.request({
                 method: "POST",
                 url: "albums/" + albumId + "/covers",
-                data: {"name": data.name, "base64": data.base64, "extension": data.extension, "token": sessionStorage.getItem('token')}
+                data: {"name": data.name, "base64": data.base64, "extension": data.extension, "token": token}
             }).then(callback);
             Buffer.clear();
         },
@@ -112,26 +119,29 @@ define(["mithril"], function (m) {
             Buffer.getRessource(url, callback);
         },
         addEvent: function (data, callback) {
+            var token = this.getToken();
             m.request({
                 method: "POST",
                 url: "events",
-                data: {"title": data.title, "dates": data.dates, "description": data.description, "token": sessionStorage.getItem('token')}
+                data: {"title": data.title, "dates": data.dates, "description": data.description, "token": token}
             }).then(callback);
             Buffer.clear();
         },
         removeEvent: function (event, callback) {
+            var token = this.getToken();
             m.request({
                 method: "DELETE",
                 url: event.url + "/" + event._id,
-                data: {"token": sessionStorage.getItem('token')}
+                data: {"token": token}
             }).then(callback);
             Buffer.clear();
         },
         updateEvent: function (data, event, callback) {
+            var token = this.getToken();
             m.request({
                 method: "PUT",
                 url: event.url + "/" + event._id,
-                data: {"token": sessionStorage.getItem('token'), title: data.title, "dates": data.dates}
+                data: {"token": token, title: data.title, "dates": data.dates}
             }).then(callback);
             Buffer.clear();
         },
@@ -145,21 +155,26 @@ define(["mithril"], function (m) {
                 });
         },
         addBiography: function (data, callback) {
+            var token = this.getToken();
             m.request({
                 method: "POST",
                 url: "biography",
-                data: {"content": data.content, "token": sessionStorage.getItem('token')}
+                data: {"content": data.content, "token": token}
             }).then(callback);
             Buffer.clear();
         },
         authenticate : function (data, callback) {
-            // implementation of request need to be moved in a service
-            // outside of this component
             m.request({
                 method: "POST",
                 url: "/authenticate",
                 data: {"name": data.login, "password": data.password}
             }).then(callback);
+        },
+        getToken: function() {
+            return sessionStorage.getItem('token');
+        },
+        removeToken: function() {
+            sessionStorage.removeItem('token');
         }
     };
 

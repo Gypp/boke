@@ -30,7 +30,8 @@ define(["mithril", "services/model"], function (m, model) {
                     m("div", {class: "title"}, "Login"),
                     m("input", {onchange: m.withAttr("value", ctrl.login), placeholder: "Indentifiant"}),
                     m("input", {type: "password", onchange: m.withAttr("value", ctrl.password), placeholder: "Mot de passe"}),
-                    m("button", {onclick: ctrl.authenticate}, "Connexion")
+                    m("button", {onclick: ctrl.authenticate}, "Connexion"),
+                    m("button", {style: "color:grey", onclick: function() {m.route("/home")}}, "Retour")
                 ])
             ]);
         }

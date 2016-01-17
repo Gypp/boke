@@ -102,6 +102,16 @@ body > div {
     padding-left: 16px;
     font-size: 20px;
 }
+#login :hover{
+    cursor: pointer;
+}
+
+#login {
+    position:absolute;
+    top:16px;
+    right:16px;
+    display:flex;
+}
 
 .login {
     display: flex;
@@ -522,10 +532,10 @@ body > div {
     height: 50px;
     background: rgb(1, 117, 230) none repeat scroll 0% 0%;
     border-radius: 100%;
-    z-index: 150;
+    z-index: 4;
     position: fixed;
-    right: 25px;
-    margin-top: -25px;
+    right: 16px;
+    margin-top: 16px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     display: flex;
     justify-content: center;
@@ -726,4 +736,15 @@ mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimim
 
 .events .admin-elements > div{
     flex-wrap: nowrap;
+}
+
+.user-menu:hover{
+    cursor: pointer;
+}
+.user-menu .menu-list{
+    color: black;
+    font-size: 18px;
+    right: 0;
+    margin-right: 8px;
+    margin-top: -8px;
 }
