@@ -7,7 +7,7 @@ define(["mithril", "components/ui/material-icons/index"], function (m, MaterialI
                     m.component(MaterialIcon, {code:"person"}),
                     m("div", "Connexion")
                 ),
-                m("div", {style: "color: rgb(114, 114, 114);font-size: 68px;margin-bottom:10%;"}, "BitGallery"),
+                m("div", {class: "title"}, "Boke"),
                 m("div", {class: "subtitle", onclick: function () {m.route("/about"); }}, "About me"),
                 m("div", {class: "subtitle", onclick: function () {m.route("/albums"); }}, "Gallery"),
                 m("div", {class: "subtitle", onclick: function () {m.route("/events"); }, style: "margin-bottom:10%;"}, "Upcomings events")

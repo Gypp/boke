@@ -166,12 +166,19 @@ body > div {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background: transparent url("../ressources/landscape1920.jpg") no-repeat scroll center center;
+}
+
+.home > .title {
+    font-size: 68px;
+    margin-bottom:15%;
+    color: black;
 }
 
 .home > .subtitle{
     font-size: 32px;
     margin: 24px;
-    color: #363636;
+    color: white;
 }
 .home > .subtitle:hover{
         cursor: pointer;
