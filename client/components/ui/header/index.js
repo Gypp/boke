@@ -40,9 +40,9 @@ define(["mithril", "components/ui/filter/index", "application-state/index", "com
                 m("div", {style: "text-align:left;display:flex;align-items:center;"}, [
                     ctrl.back() ? m("i", {class: "material-icons", style: "margin-left:15px;font-size:20px;line-height:100%;", onclick: function () {m.route(ctrl.back()); }}, "arrow_back") : ''
                 ]),
-                m("div", {style: "display: flex;justify-content: center;align-items: center;"}, [
+                m("div", {style: "display: flex;justify-content: center;align-items: center;", onclick: function(){if (!appState.navigation.disabled()) {ctrl.toggleNavigation()}}}, [
                     !appState.navigation.disabled() ? m.component(MaterialIcon, {key: new Date().getTime(), code: appState.navigation.visible() ? "keyboard_arrow_up" : "keyboard_arrow_down"}) : '',
-                    m("div", {class: "title", style: ctrl.title() === "undefined" ? "visibility:hidden;" : "position:relative;", onclick: function(){if (!appState.navigation.disabled()) {ctrl.toggleNavigation()}}}, ctrl.title())
+                    m("div", {class: "title", style: ctrl.title() === "undefined" ? "visibility:hidden;" : "position:relative;"}, ctrl.title())
                 ]),
                 m("div", {style: "height:100%;display: flex;align-items: center;justify-content: flex-end;"}, [
                     ctrl.stateVM.filter() && ctrl.filter ? m("i", {
