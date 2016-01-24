@@ -7,7 +7,11 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             var newPictureName      = m.prop("");
             var updatePictureName   = m.prop("");
             var newPicture          = m.prop(false);
-            var updatedPicture       = m.prop(false);
+            var updatedPicture      = m.prop(false);
+
+            var preloadUpdatePicture = function (picture) {
+                updatePictureName(picture.name);
+            };
 
             var getPictures = function () {
                 model.getPictures(m.route.param("albumId"), function (data) {
@@ -63,7 +67,8 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
                 updatePicture           : updatePicture,
                 pictures                : pictures,
                 newPictureProperties    : newPictureProperties,
-                updatePictureProperties : updatePictureProperties
+                updatePictureProperties : updatePictureProperties,
+                preloadUpdatePicture    : preloadUpdatePicture
             };
         },
         view: function (ctrl) {
@@ -74,7 +79,8 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
                 updateElement           : ctrl.updatePicture,
                 newElementProperties    : ctrl.newPictureProperties,
                 updateElementProperties : ctrl.updatePictureProperties,
-                elements                : ctrl.pictures
+                elements                : ctrl.pictures,
+                preloadUpdate           : ctrl.preloadUpdatePicture
             });
         }
     };

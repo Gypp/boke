@@ -11,6 +11,12 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
             var updateEventDates        = m.prop([]);
             var newEventDates           = m.prop([new Date()]);
 
+            var preloadUpdateEvent = function (event) {
+                updateEventDates(event.dates);
+                updateEventName(event.title);
+                updateEventDescription(event.description);
+            }
+
             var getEvents = function (callback) {
                 model.getEvents(function (data) {
 
@@ -57,16 +63,20 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
 
             var newEventProperties = m.prop([
                  {type: "h3", label: "Nom de l'event"},
+                 {type: "label", label: "Nom de l'event", properties:{for: "event-name"}},
                  {type: "input", value: newEventName},
+                 {type: "label", label: "Description de l'event", properties:{for: "event-description"}},
                  {type: "textarea", value: newEventDescription},
                  {type: "component", component: DatePicker, options: {dates: newEventDates}}
             ]);
 
             var updateEventProperties = m.prop([
                 {type: "h3", label: "Nom de l'event"},
+                {type: "label", label: "Nom de l'event", properties:{for: "event-name"}},
                 {type: "input", value: updateEventName},
+                {type: "label", label: "Description de l'event", properties:{for: "event-description"}},
                 {type: "textarea", value: updateEventDescription},
-                {type: "component", component: DateViewer, options: {dates: updateEventDates}}
+                {type: "component", component: DatePicker, options: {dates: updateEventDates}}
             ]);
 
             return {
@@ -76,7 +86,8 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
                 updateEvent             : updateEvent,
                 newEventProperties      : newEventProperties,
                 updateEventProperties   : updateEventProperties,
-                events                  : events
+                events                  : events,
+                preloadUpdateEvent      : preloadUpdateEvent
             };
         },
         view: function (ctrl) {
@@ -88,7 +99,8 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
                     updateElement           : ctrl.updateEvent,
                     newElementProperties    : ctrl.newEventProperties,
                     updateElementProperties : ctrl.updateEventProperties,
-                    elements                : ctrl.events
+                    elements                : ctrl.events,
+                    preloadUpdate           : ctrl.preloadUpdateEvent
                 })
             ]);
         }

@@ -33,6 +33,7 @@ define(["mithril", "components/ui/material-icons/index", "components/ui/card/ind
                 elementToUpdate         : elementToUpdate,
                 updateElement           : updateElement,
                 updateElementProperties : updateElementProperties,
+                preloadUpdate           : options.preloadUpdate,
                 appState                : appState,
                 toggleShowAdd   : function () {
                     state.showAdd(!state.showAdd());
@@ -57,7 +58,7 @@ define(["mithril", "components/ui/material-icons/index", "components/ui/card/ind
                                 content     : element.content,
                                 items       : m.prop([
                                     {label: "Delete", onClick: function () {ctrl.removeElement(element); }},
-                                    {label: "Update", onClick: function () {ctrl.toggleShowUpdate(); ctrl.elementToUpdate = element;}}
+                                    {label: "Update", onClick: function () {ctrl.preloadUpdate(element); ctrl.toggleShowUpdate(); ctrl.elementToUpdate = element; }}
                                 ])
                             });
                         })

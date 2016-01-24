@@ -1,4 +1,4 @@
-define(["mithril"], function (m) {
+define(["mithril", "components/ui/material-icons/index"], function (m, MaterialIcon) {
     'use strict';
 
     function getDays(date) {
@@ -56,7 +56,7 @@ define(["mithril"], function (m) {
                                 ctrl.currentMonth -= 1;
                             }
                             ctrl.days(getDays(new Date(ctrl.currentYear, ctrl.currentMonth, 1)));
-                        }, class: "button"}, "<") : "",
+                        }, class: "button"}, [m.component(MaterialIcon, {code: "navigate_before"})]) : "",
                         m("span", ctrl.currentYear + "-" + ("0" + (ctrl.currentMonth + 1)).slice(-2)),
                         !ctrl.readOnly ? m("span", {onclick: function () {
                             if (ctrl.currentMonth === 11) {
@@ -66,7 +66,7 @@ define(["mithril"], function (m) {
                                 ctrl.currentMonth += 1;
                             }
                             ctrl.days(getDays(new Date(ctrl.currentYear, ctrl.currentMonth, 1)));
-                        }, class: "button"}, ">") : ""
+                        }, class: "button"}, [m.component(MaterialIcon, {code: "navigate_next"})]) : ""
                     ])
                 ]),
                 m("table", {class: ""}, function () {

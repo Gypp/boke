@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        "mithril":  '../node_modules/mithril/mithril.min',
+        "mithril":  '../node_modules/mithril/mithril',
         "marked":   '../node_modules/marked/marked.min',
         "postal":   '../node_modules/postal/lib/postal.lodash.bundle'
     }

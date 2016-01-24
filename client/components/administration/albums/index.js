@@ -9,6 +9,10 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             var newAlbumCover       = m.prop(false);
             var updateAlbumCover    = m.prop(false);
 
+            var preloadUpdateAlbum = function (album){
+                updateAlbumName(album.name);
+            }
+
             var getAlbums = function (callback) {
                 model.getAlbums(function (data) {
                     albums(data);
@@ -81,7 +85,8 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
                 updateAlbum             : updateAlbum,
                 newAlbumProperties      : newAlbumProperties,
                 updateAlbumProperties   : updateAlbumProperties,
-                albums                  : albums
+                albums                  : albums,
+                preloadUpdateAlbum      : preloadUpdateAlbum
             };
         },
         view: function (ctrl) {
@@ -92,7 +97,8 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
                 updateElement           : ctrl.updateAlbum,
                 newElementProperties    : ctrl.newAlbumProperties,
                 updateElementProperties : ctrl.updateAlbumProperties,
-                elements                : ctrl.albums
+                elements                : ctrl.albums,
+                preloadUpdate           : ctrl.preloadUpdateAlbum
             });
         }
     };

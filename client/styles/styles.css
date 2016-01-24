@@ -711,6 +711,8 @@ mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimim
     display: flex;
     justify-content: center;
     width: 100%;
+    margin: 18px 0px 12px 0px;
+    font-size: 18px;
 }
 .date-picker > span {
     text-align: center;
@@ -723,6 +725,11 @@ mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimim
     height: 25px;
     background:#0069CF;
     border-radius: 50%;
+    color: white;
+}
+
+.date-picker .button:hover{
+    cursor: pointer;
 }
 .date-picker{
     display: flex;

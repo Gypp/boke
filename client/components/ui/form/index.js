@@ -45,9 +45,12 @@ define(["mithril", "utils"], function (m, utils) {
                             prop.properties = {};
                         }
                         if(prop.type === "input" || prop.type === "textarea") {
+
+
                             prop.properties.oninput = m.withAttr("value", function(value){
                                 prop.value(value);
                             });
+
                             if (prop.properties.type === "file") {
                                 prop.properties.config = function (elem, init) {
                                      if (!init) {
@@ -61,8 +64,12 @@ define(["mithril", "utils"], function (m, utils) {
                                          }, false);
                                      }
                                 };
+                            } else {
+                                prop.properties.value = prop.value();
+                                return m(prop.type, prop.properties);
                             }
-                            return m(prop.type, prop.properties, prop.value);
+
+                            return m(prop.type, prop.properties);
                         } else if (prop.type === "component") {
                             return m.component(prop.component, prop.options);
                         } else {
