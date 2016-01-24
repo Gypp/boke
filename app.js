@@ -16,7 +16,7 @@
         mkdirp('./data/covers/');
     });
 
-    app.use(bodyParser.json({limit: '10mb'}));
+    app.use(bodyParser.json({limit: '50mb'}));
     app.enable('etag');
 
     app.use('/client', express.static(__dirname + '/client'));

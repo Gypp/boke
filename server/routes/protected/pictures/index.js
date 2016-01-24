@@ -40,7 +40,19 @@ module.exports.set = function (app) {
     });
 
     app.put('/albums/:albumId/pictures/:pictureId', function (req, res) {
-        Picture.model.update({_id: req.params.pictureId}, {name: req.body.name}, {upsert: false}, function (err, doc) {
+        var base64Data        = req.body.base64;
+        var pictureName       = req.body.name;
+        var pictureLocation   = './data/pictures/' + uuid.v1();
+        var pictureExtension  = '.' + req.body.extension;
+
+console.log(req.body.base64);
+
+        var buff = new Buffer(base64Data.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
+        require("fs").writeFile(pictureLocation + pictureExtension, buff, function (err) {
+            console.log('done');
+        });
+
+        Picture.model.update({_id: req.params.pictureId}, {name: pictureName, location: pictureLocation, extension: pictureExtension}, {upsert: false}, function (err, doc) {
             if (err) {
                 return res.send(err);
             }

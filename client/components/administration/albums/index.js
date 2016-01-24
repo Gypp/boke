@@ -7,6 +7,7 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             var newAlbumName        = m.prop("");
             var updateAlbumName     = m.prop("");
             var newAlbumCover       = m.prop(false);
+            var updateAlbumCover    = m.prop(false);
 
             var getAlbums = function (callback) {
                 model.getAlbums(function (data) {
@@ -49,33 +50,28 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             };
 
             var updateAlbum = function (album, callback) {
-                model.updateAlbum({name: updateAlbumName()}, album, callback);
+                model.updateAlbum({name: updateAlbumName()}, album, function (data) {
+                    model.addCover({name: "cover", base64: updateAlbumCover().data, extension: updateAlbumCover().extension}, album._id, function () {
+                        getAlbums();
+                    });
+                    if (typeof callback === "function") {callback(); }
+                });
             };
 
             var newAlbumProperties = m.prop([
-                function () {return m("h3", "Nouvel album"); },
-                function () {return m("label", {for: "album-name"}, "Nom de l'abum"); },
-                function () {return m("input", {name: "album-name", onchange:  m.withAttr("value", newAlbumName), value: newAlbumName()}); },
-                function () {return m("label", {for: "album-cover"}, "Couverture de l'album"); },
-                function () {return m("input", {name: "album-cover", type: "file", id: "cover", config: function (elem, init) {
-                    if (!init) {
-                        elem.addEventListener('change', function () {
-                            var reader = new FileReader();
-                            reader.addEventListener('load', function () {
-                                newAlbumCover({data: reader.result, extension: elem.files[0].name.match(/\.([0-9a-z]+)/i)[1]});
-                            }, false);
-                            reader.readAsDataURL(elem.files[0]);
-                        }, false);
-                    }
-                }
-                    });
-                    }
+                {type: "h3", label: "Nouvel album"},
+                {type: "label", label: "Nom de l'abum", properties:{for: "album-name"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "album-name"}, value: newAlbumName},
+                {type: "label", label: "Couverture de l'album", properties:{for: "album-cover"}},
+                {type: "input", mandatory: true, properties: {type: "file", name: "album-cover", id: "cover"}, value: newAlbumCover}
             ]);
 
             var updateAlbumProperties = m.prop([
-                function () {return m("h3", "Mettre à jour l'album"); },
-                function () {return m("label", {name: "album-name", for: "album-name"}, "Nom de l'abum"); },
-                function () {return m("input", {onchange:  m.withAttr("value", updateAlbumName), value: updateAlbumName()}); }
+                {type: "h3", label: "Mettre à jour l'album"},
+                {type: "label", label: "Nom de l'abum", properties:{for: "album-name"}},
+                {type: "input", mandatory: true, properties: {name: "album-name"}, value: updateAlbumName},
+                {type: "label", label: "Couverture de l'album", properties:{for: "album-cover"}},
+                {type: "input", mandatory: true, properties: {type: "file", name: "album-cover", id: "cover"}, value: updateAlbumCover}
             ]);
 
             return {

@@ -93,7 +93,7 @@ define(["mithril"], function (m) {
             m.request({
                 method: "PUT",
                 url: picture.url + "/" + picture._id,
-                data: {"token": token, name: data.name}
+                data: {"token": token, name: data.name, "base64": data.base64, "extension": data.extension}
             }).then(callback);
             Buffer.clear();
         },

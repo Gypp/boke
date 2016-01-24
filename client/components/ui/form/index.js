@@ -9,6 +9,7 @@ define(["mithril", "utils"], function (m, utils) {
             };
         },
         view: function (ctrl, args) {
+                                console.log(ctrl.formProperties());
             return m("div", {class: "form"}, [
                 m("div", {config: function (elem, isInit) {
                     if (!isInit) {
@@ -40,12 +41,41 @@ define(["mithril", "utils"], function (m, utils) {
                     }
                 }}, [
                     ctrl.formProperties().map(function (prop) {
-                        return prop();
+                        if(prop.type === "input") {
+                            prop.properties.oninput = m.withAttr("value", function(value){
+                                prop.value(value);
+                            });
+                            if (prop.properties.type === "file") {
+                                prop.properties.config = function (elem, init) {
+                                     if (!init) {
+                                         elem.addEventListener('change', function () {
+                                             var reader = new FileReader();
+                                             reader.addEventListener('load', function () {
+                                                 prop.value({data: reader.result, extension: elem.files[0].name.match(/\.([0-9a-z]+)/i)[1]});
+                                             }, false);
+
+                                             reader.readAsDataURL(elem.files[0]);
+                                         }, false);
+                                     }
+                                };
+                            }
+                            return m(prop.type, prop.properties, prop.value);
+                        } else {
+                            return m(prop.type, prop.properties, prop.label);
+                        }
+
                     }),
                     m("div", {class: "validate"}, [
                         m("button", {onclick: function () {
-                            ctrl.onClick();
-                            if (args.show()) {args.show(!args.show()); }
+                            if (ctrl.formProperties().every(function (prop) {
+                                return prop.mandatory ? (prop.value() ? true : false) : true
+                            }))
+                             {
+                                ctrl.onClick();
+                                if (args.show()) {args.show(!args.show()); }
+                            } else {
+                                alert("Des champs obligatoire sont vides");
+                            }
                         }}, "Envoyer")
                     ])
                 ])

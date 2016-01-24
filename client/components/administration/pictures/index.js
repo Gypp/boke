@@ -7,6 +7,7 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             var newPictureName      = m.prop("");
             var updatePictureName   = m.prop("");
             var newPicture          = m.prop(false);
+            var updatedPicture       = m.prop(false);
 
             var getPictures = function () {
                 model.getPictures(m.route.param("albumId"), function (data) {
@@ -34,33 +35,23 @@ define(["mithril", "services/model", "components/ui/crud/index"], function (m, m
             };
 
             var updatePicture = function (picture, callback) {
-                model.updatePicture({name: updatePictureName()}, picture, callback);
+                model.updatePicture({name: updatePictureName(), base64: updatedPicture().data, extension: updatedPicture().extension}, picture, callback);
             };
 
             var newPictureProperties = m.prop([
-                function () {return m("h3", "Nouvelle photo"); },
-                function () {return m("label", {for: "picture-name"}, "Nom de la photo"); },
-                function () {return m("input", {name: "picture-name", onchange:  m.withAttr("value", newPictureName), value: newPictureName()}); },
-                function () {return m("label", {for: "picture"}, "Photo"); },
-                function () {return m("input", {name: "picture", type: "file", id: "picture", config: function (elem, init) {
-                    if (!init) {
-                        elem.addEventListener('change', function () {
-                            var reader = new FileReader();
-                            reader.addEventListener('load', function () {
-                                newPicture({data: reader.result, extension: elem.files[0].name.match(/\.([0-9a-z]+)/i)[1]});
-                            }, false);
-                            reader.readAsDataURL(elem.files[0]);
-                        }, false);
-                    }
-                }
-                    });
-                    }
+                {type: "h3", label: "Nouvel photo"},
+                {type: "label", label: "Nom de la photo", properties:{for: "picture-name"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "picture-name"}, value: newPictureName},
+                {type: "label", label: "Photo", properties:{for: "picture"}},
+                {type: "input", mandatory: true, properties: {type: "file", name: "picture", id: "picture"}, value: newPicture}
             ]);
 
             var updatePictureProperties = m.prop([
-                function () {return m("h3", "Modifier la photo"); },
-                function () {return m("label", {for: "picture-name"}, "Nom de la photo"); },
-                function () {return m("input", {onchange:  m.withAttr("value", updatePictureName), value: updatePictureName()}); }
+                {type: "h3", label: "Modifier le nom de la photo"},
+                {type: "label", label: "Nom de la photo", properties:{for: "picture-name"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "picture-name"}, value: updatePictureName},
+                {type: "label", label: "Photo", properties:{for: "picture"}},
+                {type: "input", mandatory: true, properties: {type: "file", name: "picture", id: "picture"}, value: updatedPicture}
             ]);
 
             getPictures();
