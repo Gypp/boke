@@ -41,7 +41,10 @@ define(["mithril", "utils"], function (m, utils) {
                     }
                 }}, [
                     ctrl.formProperties().map(function (prop) {
-                        if(prop.type === "input") {
+                        if (!prop.properties) {
+                            prop.properties = {};
+                        }
+                        if(prop.type === "input" || prop.type === "textarea") {
                             prop.properties.oninput = m.withAttr("value", function(value){
                                 prop.value(value);
                             });
@@ -60,6 +63,8 @@ define(["mithril", "utils"], function (m, utils) {
                                 };
                             }
                             return m(prop.type, prop.properties, prop.value);
+                        } else if (prop.type === "component") {
+                            return m.component(prop.component, prop.options);
                         } else {
                             return m(prop.type, prop.properties, prop.label);
                         }
@@ -69,8 +74,7 @@ define(["mithril", "utils"], function (m, utils) {
                         m("button", {onclick: function () {
                             if (ctrl.formProperties().every(function (prop) {
                                 return prop.mandatory ? (prop.value() ? true : false) : true
-                            }))
-                             {
+                            })) {
                                 ctrl.onClick();
                                 if (args.show()) {args.show(!args.show()); }
                             } else {

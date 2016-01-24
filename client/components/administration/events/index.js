@@ -1,4 +1,4 @@
-define(["mithril", "services/model", "components/ui/crud/index", "components/ui/date-picker/index"], function (m, model, Crud, DatePicker) {
+define(["mithril", "services/model", "components/ui/crud/index", "components/ui/date-picker/index", "components/ui/date-viewer/index"], function (m, model, Crud, DatePicker, DateViewer) {
     'use strict';
 
     var Events = {
@@ -21,7 +21,7 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
 
                         event.content = m("div", {class: "event-content"}, [
                             m("p", {type: "text"}, event.description),
-                            m.component(DatePicker, {dates: m.prop(event.dates), readOnly: true})
+                            m.component(DateViewer, {dates: m.prop(event.dates), readOnly: true})
                         ]);
                     });
                     events(data);
@@ -56,17 +56,17 @@ define(["mithril", "services/model", "components/ui/crud/index", "components/ui/
             };
 
             var newEventProperties = m.prop([
-                function () {return m("h3", "Nom de l'event"); },
-                function () {return m("input", {onchange:  m.withAttr("value", newEventName), value: newEventName()}); },
-                function () {return m("textarea", {onchange:  m.withAttr("value", newEventDescription), value: newEventDescription()}); },
-                function () {return m.component(DatePicker, {dates: newEventDates}); }
+                 {type: "h3", label: "Nom de l'event"},
+                 {type: "input", value: newEventName},
+                 {type: "textarea", value: newEventDescription},
+                 {type: "component", component: DatePicker, options: {dates: newEventDates}}
             ]);
 
             var updateEventProperties = m.prop([
-                function () {return m("h3", "Nom de l'event"); },
-                function () {return m("input", {onchange:  m.withAttr("value", updateEventName), value: updateEventName()}); },
-                function () {return m("textarea", {onchange:  m.withAttr("value", updateEventDescription), value: updateEventDescription()}); },
-                function () {return m.component(DatePicker, {dates: updateEventDates}); }
+                {type: "h3", label: "Nom de l'event"},
+                {type: "input", value: updateEventName},
+                {type: "textarea", value: updateEventDescription},
+                {type: "component", component: DateViewer, options: {dates: updateEventDates}}
             ]);
 
             return {

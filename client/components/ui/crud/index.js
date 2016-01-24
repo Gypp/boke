@@ -54,10 +54,10 @@ define(["mithril", "components/ui/material-icons/index", "components/ui/card/ind
                                 key         : element._id,
                                 name        : element.name,
                                 title       : element.title,
-                                content     : element.content, //m("div", element.pictureRef !== undefined ? {class: "background", style: "background-image: url('" + element.pictureRef + "');" , onclick: element.onClick} : {}),
+                                content     : element.content,
                                 items       : m.prop([
                                     {label: "Delete", onClick: function () {ctrl.removeElement(element); }},
-                                    {label: "Update", onClick: function () {ctrl.toggleShowUpdate(); ctrl.elementToUpdate = element; }}
+                                    {label: "Update", onClick: function () {ctrl.toggleShowUpdate(); ctrl.elementToUpdate = element;}}
                                 ])
                             });
                         })

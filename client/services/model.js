@@ -141,7 +141,7 @@ define(["mithril"], function (m) {
             m.request({
                 method: "PUT",
                 url: event.url + "/" + event._id,
-                data: {"token": token, title: data.title, "dates": data.dates}
+                data: {"token": token, title: data.title, "dates": data.dates, "description": data.description}
             }).then(callback);
             Buffer.clear();
         },
