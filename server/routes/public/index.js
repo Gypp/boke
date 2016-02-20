@@ -8,6 +8,7 @@ module.exports.set = function (app) {
     var events          = require('./events');
     var biography       = require('./biography');
     var authenticate    = require('./authenticate');
+    var site            = require('./site');
 
     albums.set(app);
     pictures.set(app);
@@ -15,4 +16,5 @@ module.exports.set = function (app) {
     events.set(app);
     biography.set(app);
     authenticate.set(app);
+    site.set(app);
 };

@@ -7,10 +7,12 @@ module.exports.set = function (app) {
     var events      = require('./events');
     var covers      = require('./covers');
     var biography   = require('./biography');
+    var site        = require('./site');
 
     albums.set(app);
     pictures.set(app);
     events.set(app);
     covers.set(app);
     biography.set(app);
+    site.set(app);
 };

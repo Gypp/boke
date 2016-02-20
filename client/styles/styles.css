@@ -166,7 +166,6 @@ body > div {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: transparent url("../ressources/landscape1920.jpg") no-repeat scroll center center;
 }
 
 .home > .title {

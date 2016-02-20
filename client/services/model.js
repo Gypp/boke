@@ -175,6 +175,23 @@ define(["mithril"], function (m) {
         },
         removeToken: function() {
             sessionStorage.removeItem('token');
+        },
+        getSite: function(callback) {
+            var url = "site";
+            m.request({
+                method: "GET",
+                url: url
+            }).then(callback);
+        },
+        updateSite: function(data, callback) {
+            var url     = "site";
+            var token   = this.getToken();
+            m.request({
+                method: "PUT",
+                url: url,
+                data: {"token": token, background: data.background, title: data.title}
+            }).then(callback);
+            Buffer.clear();
         }
     };
 
