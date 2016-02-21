@@ -10,8 +10,8 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
     "components/site/about/index", "components/site/slider/index", "components/ui/header/index", "application-state/index",
     "components/ui/filter/index", "components/administration/login/index", "components/administration/about/index",
     "components/administration/albums/index", "components/administration/events/index", "components/administration/pictures/index",
-    "components/ui/navigation/index", "components/site/events/index", "components/administration/parameters/index", "services/model"],
-    function (m, Albums, Pictures, Home, Aboutme, Slider, Header, appState, Filter, Login, AdminAbout, AdminAlbums, AdminEvents, AdminPictures, Navigation, Events, Parameters, model) {
+    "components/ui/navigation/index", "components/site/events/index", "components/administration/settings/index", "services/model"],
+    function (m, Albums, Pictures, Home, Aboutme, Slider, Header, appState, Filter, Login, AdminAbout, AdminAlbums, AdminEvents, AdminPictures, Navigation, Events, Settings, model) {
         'use strict';
         m.route.mode = "hash";
 
@@ -24,16 +24,16 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
         });
 
         var administrationMenu = [
-            {label: "Paramètres", onClick: function() {m.route("/administrate/parameters"); }},
+            {label: "Paramètres", onClick: function() {m.route("/administrate/settings"); }},
             {label: "Déconnexion", onClick: function() {model.removeToken(); m.route("/home"); }}
         ];
 
         m.route(document.body, "/", {
             "/": Home,
             "/login": Login,
-            "/administrate/parameters": {
+            "/administrate/settings": {
                 controller: function () {
-                    appState.header.title("Parameters");
+                    appState.header.title("Settings");
                     appState.navigation.visible(false);
                     appState.navigation.disabled(false);
 
@@ -43,7 +43,7 @@ require(["mithril", "components/site/albums/index", "components/site/pictures/in
                     return m("div", [
                         m.component(Header, ctrl),
                         appState.navigation.visible() ? NavigationWithRoutes : "",
-                        m.component(Parameters, {})
+                        m.component(Settings, {})
                     ])
                 }
             },

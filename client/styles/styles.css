@@ -761,3 +761,44 @@ mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimimi? MIMIMI.mimimi mimimi! mimim
     margin-right: 8px;
     margin-top: -8px;
 }
+
+.admin-settings{
+    flex: 1 1 0%;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-settings form {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.admin-settings form > h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.admin-settings form > * {
+    display: block;
+    margin: 0 16px;
+}
+
+.admin-settings form > label {
+    margin-top: 12px;
+    margin-bottom: 6px
+}
+.admin-settings form > button {
+    margin: 8px 8px 8px 8px;
+    border: 0px none;
+    border-radius: 2px;
+    font-size: 16px;
+    float: right;
+    padding: 6px;
+    font-weight: 600;
+    color: #0069CF;
+    background: transparent none repeat scroll 0%;
+}
+
+.admin-settings form > button:hover {
+    cursor: pointer;
+}
