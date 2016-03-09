@@ -15,7 +15,6 @@ define(["mithril", "services/model", "application-state/index", "components/ui/c
         view: function (ctrl) {
             return m("div", {class: "events-client"}, [
                 ctrl.events().map(function (event) {
-                    console.log(event);
                     return m.component(Card, {
                         title: event.title,
                         content: [

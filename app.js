@@ -10,6 +10,7 @@
     var bodyParser  = require('body-parser');
     var mongoose    = require('mongoose');
     var mkdirp      = require('mkdirp');
+    var config      = require('./server/config');
     var Site        = require('./server/models/site');
 
     mkdirp('./data', function(err) {
@@ -26,7 +27,9 @@
 
     routes.set(app, fs, path);
 
-    mongoose.connect('mongodb://localhost');
+    //mongoose.connect('mongodb://' + config.mongo.user + ':' + config.mongo.password + '@' + config.mongo.adress + ':' + config.mongo.port + '/' + config.mongo.database);
+    mongoose.connect('mongodb://' + config.mongo.adress + ':' + config.mongo.port + '/' + config.mongo.database);
+
     var db = mongoose.connection;
 
     db.on('error', console.error.bind(console, 'connection error:'));

@@ -6,6 +6,10 @@ module.exports = (function () {
     var siteSchema = mongoose.Schema({
         title: String,
         background: String,
+        biographyLabel: String,
+        picturesLabel: String,
+        eventsLabel: String,
+        backgroundColor: String
     });
 
     var Site = mongoose.model('Site', siteSchema);

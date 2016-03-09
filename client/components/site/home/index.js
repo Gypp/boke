@@ -18,9 +18,9 @@ define(["mithril", "components/ui/material-icons/index", "services/model"], func
                     m("div", "Connexion")
                 ),
                 m("div", {class: "title"}, ctrl.site() ? ctrl.site().title  : ""),
-                m("div", {class: "subtitle", onclick: function () {m.route("/about"); }}, "À propos"),
-                m("div", {class: "subtitle", onclick: function () {m.route("/albums"); }}, "Photographies"),
-                m("div", {class: "subtitle", onclick: function () {m.route("/events"); }, style: "margin-bottom:10%;"}, "Événements à venir")
+                m("div", {class: "subtitle", onclick: function () {m.route("/about"); }}, ctrl.site() ? ctrl.site().biographyLabel : ""),
+                m("div", {class: "subtitle", onclick: function () {m.route("/albums"); }}, ctrl.site() ? ctrl.site().picturesLabel : ""),
+                m("div", {class: "subtitle", onclick: function () {m.route("/events"); }, style: "margin-bottom:10%;"}, ctrl.site() ? ctrl.site().eventsLabel : "")
             ]);
         }
     };

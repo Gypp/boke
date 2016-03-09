@@ -9,7 +9,6 @@ define(["mithril", "utils"], function (m, utils) {
             };
         },
         view: function (ctrl, args) {
-                                console.log(ctrl.formProperties());
             return m("div", {class: "form"}, [
                 m("div", {config: function (elem, isInit) {
                     if (!isInit) {

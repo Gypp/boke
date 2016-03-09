@@ -186,10 +186,19 @@ define(["mithril"], function (m) {
         updateSite: function(data, callback) {
             var url     = "site";
             var token   = this.getToken();
+            console.log(data);
             m.request({
                 method: "PUT",
                 url: url,
-                data: {"token": token, background: data.background, title: data.title}
+                data: {
+                    "token": token,
+                    "background": data.background,
+                    "title": data.title,
+                    "biographyLabel": data.biographyLabel,
+                    "picturesLabel": data.picturesLabel,
+                    "eventsLabel": data.eventsLabel,
+                    "backgroundColor": data.backgroundColor
+                }
             }).then(callback);
             Buffer.clear();
         }

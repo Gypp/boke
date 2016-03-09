@@ -1,48 +1,63 @@
-define(["mithril", "services/model"], function (m, model) {
+define(["mithril", "services/model", "components/ui/form/index"], function (m, model, Form) {
     'use strict';
 
     var Settings = {
         controller: function () {
-            var site = m.prop();
+            var siteTitle               = m.prop("");
+            var siteBackground          = m.prop();
+            var siteBiographyLabel      = m.prop("");
+            var sitePicturesLabel       = m.prop("");
+            var siteEventsLabel         = m.prop("");
+            var siteBackgroundColor     = m.prop("");
 
             model.getSite(function(data) {
-                site(data[0]);
+                data = data[0];
+                siteTitle(data.title);
+                siteBiographyLabel(data.biographyLabel);
+                sitePicturesLabel(data.picturesLabel);
+                siteEventsLabel(data.eventsLabel);
             });
 
+            var updateSiteProperties = m.prop([
+                {type: "h3", label: "Paramètres du site"},
+                {type: "label", label: "Nom du site", properties:{for: "site-title"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "site-title"}, value: siteTitle},
+                {type: "label", label: "Fond d'écran du site", properties:{for: "site-background"}},
+                {type: "input", properties: {type: "file", name: "site-background", id: "site-background"}, value: siteBackground},
+                {type: "label", label: "Text du lien vers les biography", properties:{for: "site-biography"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "site-biography", id: "site-biography"}, value: siteBiographyLabel},
+                {type: "label", label: "Text du lien vers les photos", properties:{for: "site-pictures"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "site-pictures", id: "site-pictures"}, value: sitePicturesLabel},
+                {type: "label", label: "Text du lien vers les évenements", properties:{for: "site-events"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "site-events", id: "site-events"}, value: siteEventsLabel},
+                {type: "label", label: "Couleur de l'arrière plan (en hexadécimal)", properties:{for: "site-backgroundColor"}},
+                {type: "input", mandatory: true, properties: {type: "text", name: "site-backgroundColor", id: "site-backgroundColor"}, value: siteBackgroundColor}
+            ]);
+
             return {
-                site: site,
+                properties: updateSiteProperties,
+                onClick: function() {
+                    model.updateSite({
+                        background: siteBackground(),
+                        title: siteTitle(),
+                        biographyLabel:siteBiographyLabel(),
+                        picturesLabel:sitePicturesLabel(),
+                        eventsLabel:siteEventsLabel(),
+                        backgroundColor: siteBackgroundColor()
+                    }, function() {
+                        m.route("/administrate/albums");
+                    });
+
+                }
             };
         },
         view: function (ctrl) {
             return m("div", {class: "admin-settings"}, [
-                m("form", [
-                    m("h3", "Propriétés du site"),
-                    m("label", "Titre"),
-                    m("input", {oninput: m.withAttr("value", function(data) {ctrl.site().title = data}), value: ctrl.site().title}),
-                    m("label", "Image de fond"),
-                    m("input", {type: "file",
-                        config: function (elem, init) {
-                             if (!init) {
-                                 elem.addEventListener('change', function () {
-                                     var reader = new FileReader();
-                                     reader.addEventListener('load', function () {
-                                         ctrl.site().background = {
-                                             data: reader.result,
-                                             extension: elem.files[0].name.match(/\.([0-9a-z]+)/i)[1]
-                                         };
-                                     }, false);
-
-                                     reader.readAsDataURL(elem.files[0]);
-                                 }, false);
-                             }
-                        }
-                    }, "Charger une image"),
-                    m("button", {onclick: function(){
-                        model.updateSite(ctrl.site(), function() {
-                            m.redraw();
-                        });
-                    }}, "Mettre à jour")
-                ])
+                m.component(Form, {
+                    formProperties: ctrl.properties,
+                    show: function(){},
+                    onClick: ctrl.onClick
+                })
             ]);
         }
     };
